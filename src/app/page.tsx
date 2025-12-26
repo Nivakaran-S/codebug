@@ -307,19 +307,20 @@ export default function Home() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Gradient Background on Hover */}
+                <div className='absolute inset-0 bg-[#1D1D1D] opacity-0 group-hover:opacity-100 transition-all duration-500'></div>
 
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-white shadow-lg flex items-center justify-center mb-6 group-hover:bg-white/90 transition-all duration-500 p-2">
                     <Image src={entity.logo} alt={entity.name} width={64} height={64} className="object-contain" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#171717] duration-500 mb-2">
+                  <h3 className="text-2xl group-hover:text-white font-bold text-[#171717] duration-500 mb-2">
                     {entity.name}
                   </h3>
                   <p className="text-[#EFA130] font-medium mb-4  duration-500">
                     {entity.tagline}
                   </p>
-                  <p className="text-gray-600 duration-500 leading-relaxed">
+                  <p className="text-gray-600 group-hover:text-white duration-500 leading-relaxed">
                     {entity.description}
                   </p>
 
@@ -334,13 +335,13 @@ export default function Home() {
                         <img
                           src={tech.logo}
                           alt={tech.name}
-                          className="w-full h-full object-contain group-hover:invert transition-all duration-300"
+                          className="w-full h-full object-contain transition-all duration-300"
                         />
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-6 flex items-center gap-2 text-[#4B4B4D]  duration-500">
+                  <div className="mt-6 flex items-center group-hover:text-white gap-2 text-[#4B4B4D]  duration-500">
                     <span className="font-medium">Explore</span>
                     <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
