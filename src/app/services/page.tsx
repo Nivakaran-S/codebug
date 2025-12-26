@@ -399,6 +399,7 @@ export default function Services() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {process.map((item, index) => (
                             <div key={index} className="relative">
+                                
                                 <div className="text-7xl font-bold text-white/5 absolute -top-4 -left-2">{item.step}</div>
                                 <div className="relative z-10 pt-8">
                                     <div className="w-12 h-12 rounded-full bg-[#EFA130] text-black font-bold flex items-center justify-center mb-4">
@@ -407,8 +408,8 @@ export default function Services() {
                                     <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
                                     <p className="text-gray-400 leading-relaxed">{item.description}</p>
                                 </div>
-                                {index < process.length - 1 && (
-                                    <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-[#EFA130] to-transparent -translate-x-8" />
+                                {index  < process.length && (
+                                    <div className="hidden lg:block absolute top-16  w-full h-0.5 bg-gradient-to-r from-[#EFA130] to-transparent -translate-x-8" />
                                 )}
                             </div>
                         ))}
