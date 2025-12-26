@@ -304,7 +304,7 @@ export default function Services() {
                             <a
                                 key={entity.id}
                                 href={`#${entity.id}`}
-                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:scale-105 ${entity.bgColor} hover:shadow-lg`}
+                                className={`px-4 text-gray-900 ring-[1px] ring-gray-500 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:scale-105 ${entity.bgColor} hover:shadow-lg`}
                             >
                                 {entity.name}
                             </a>
@@ -346,7 +346,7 @@ export default function Services() {
                             {entity.services.map((service, sIndex) => (
                                 <div
                                     key={sIndex}
-                                    className="bg-white rounded-xl p-6 border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                                    className="bg-white hover:scale-105 rounded-xl p-6 border border-gray-600 hover:border-gray-400 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                                 >
                                     <div className={`w-10 h-10 rounded-lg ${entity.bgColor} flex items-center justify-center mb-4`}>
                                         <span className={`text-lg font-bold bg-gradient-to-r ${entity.color} bg-clip-text text-transparent`}>
@@ -365,7 +365,7 @@ export default function Services() {
                             {entity.technologies.map((tech, tIndex) => (
                                 <div
                                     key={tIndex}
-                                    className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-white rounded-full border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300 hover:scale-105"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-white rounded-full border border-gray-500 hover:border-gray-400 hover:shadow-md transition-all duration-300 hover:scale-105"
                                     title={tech}
                                 >
                                     {techLogos[tech] && (

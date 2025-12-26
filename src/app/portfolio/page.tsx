@@ -126,7 +126,7 @@ export default function Portfolio() {
             </section>
 
             {/* Filters */}
-            <section className="py-8 bg-white sticky top-[73px] z-40 border-b border-gray-100">
+            <section className="py-5 bg-white sticky top-[73px] z-40 border-b border-t border-gray-600">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                         {filters.map((filter) => (
@@ -135,7 +135,7 @@ export default function Portfolio() {
                                 onClick={() => setActiveFilter(filter.key)}
                                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 cursor-pointer ${activeFilter === filter.key
                                     ? 'bg-[#4B4B4D] text-white'
-                                    : 'bg-[#f8f8f8] text-gray-600 hover:bg-gray-200'
+                                    : 'bg-[#f1f1f1] text-gray-600 ring-[0.8px] ring-gray-400 hover:bg-gray-200'
                                     }`}
                             >
                                 {filter.label}
