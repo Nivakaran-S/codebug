@@ -244,7 +244,7 @@ export default function Home() {
           <div className="animate-fade-in-up">
             <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-8">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-gray-300 text-sm">Now accepting new projects for 2025</span>
+              <span className="text-gray-300 text-sm">Now accepting new projects for 2026</span>
             </div>
           </div>
 
@@ -303,24 +303,23 @@ export default function Home() {
               <Link
                 key={entity.name}
                 href={entity.href}
-                className="group relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-transparent transition-all duration-500 hover-lift overflow-hidden"
+                className="group relative bg-white rounded-2xl p-8 border border-gray-400 border-[1.8px]  transition-all duration-500 hover-lift overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Gradient Background on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${entity.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-white shadow-lg flex items-center justify-center mb-6 group-hover:bg-white/90 transition-all duration-500 p-2">
                     <Image src={entity.logo} alt={entity.name} width={64} height={64} className="object-contain" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#171717] group-hover:text-white transition-colors duration-500 mb-2">
+                  <h3 className="text-2xl font-bold text-[#171717] duration-500 mb-2">
                     {entity.name}
                   </h3>
-                  <p className="text-[#EFA130] font-medium mb-4 group-hover:text-white/90 transition-colors duration-500">
+                  <p className="text-[#EFA130] font-medium mb-4  duration-500">
                     {entity.tagline}
                   </p>
-                  <p className="text-gray-600 group-hover:text-white/80 transition-colors duration-500 leading-relaxed">
+                  <p className="text-gray-600 duration-500 leading-relaxed">
                     {entity.description}
                   </p>
 
@@ -335,13 +334,13 @@ export default function Home() {
                         <img
                           src={tech.logo}
                           alt={tech.name}
-                          className="w-full h-full object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                          className="w-full h-full object-contain group-hover:invert transition-all duration-300"
                         />
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-6 flex items-center gap-2 text-[#4B4B4D] group-hover:text-white transition-colors duration-500">
+                  <div className="mt-6 flex items-center gap-2 text-[#4B4B4D]  duration-500">
                     <span className="font-medium">Explore</span>
                     <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
