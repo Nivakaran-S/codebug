@@ -20,7 +20,7 @@ export default function Services() {
     const techLogos: { [key: string]: string } = {
         'TensorFlow': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
         'PyTorch': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
-        'LangChain': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/langchain/langchain-original.svg',
+        'LangChain': 'https://cdn.simpleicons.org/langchain',
         'Hugging Face': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
         'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
         'Scikit-learn': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg',
@@ -45,18 +45,19 @@ export default function Services() {
         'Solidity': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg',
         'Rust': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg',
         'Ethereum': 'https://cdn.simpleicons.org/ethereum',
-        'Solana': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/solana/solana-original.svg',
+        'Solana': 'https://cdn.simpleicons.org/solana',
         'Web3.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/web3js/web3js-original.svg',
         'Hardhat': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/hardhat/hardhat-original.svg',
-        'IPFS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ipfs/ipfs-original.svg',
+        'IPFS': 'https://cdn.simpleicons.org/ipfs',
         'The Graph': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg',
         'Arduino': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg',
         'Raspberry Pi': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg',
         'ESP32': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg',
-        'MQTT': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mosquitto/mosquitto-original.svg',
+        'MQTT': 'https://cdn.simpleicons.org/mqtt',
         'C/C++': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
         'AWS IoT': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
         'Azure IoT': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
+        'Custom PCB': 'https://cdn.simpleicons.org/kicad',
     }
 
     const entities = [
@@ -237,7 +238,7 @@ export default function Services() {
                     description: 'Real-time dashboards and alerting systems for monitoring distributed IoT networks.'
                 }
             ],
-            technologies: ['Arduino', 'Raspberry Pi', 'ESP32', 'MQTT', 'Python', 'C/C++', 'AWS IoT', 'Azure IoT'],
+            technologies: ['Arduino', 'Raspberry Pi', 'ESP32', 'MQTT', 'Python', 'C/C++', 'AWS IoT', 'Azure IoT', 'Custom PCB'],
             logo: CodebugNexus // Placeholder - replace with CodebugSpark when logo is available
         }
     ]
