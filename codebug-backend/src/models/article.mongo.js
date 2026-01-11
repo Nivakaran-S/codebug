@@ -64,8 +64,8 @@ const articleSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Generate slug from title before saving
-articleSchema.pre('save', function (next) {
+// Generate slug from title before saving (async for Mongoose 8+)
+articleSchema.pre('save', async function () {
     if (this.isModified('title') && !this.slug) {
         this.slug = this.title
             .toLowerCase()
@@ -76,17 +76,12 @@ articleSchema.pre('save', function (next) {
     if (this.isModified('status') && this.status === 'published' && !this.publishedAt) {
         this.publishedAt = new Date();
     }
-    next();
-});
-
-// Calculate read time based on content
-articleSchema.pre('save', function (next) {
+    // Calculate read time based on content
     if (this.isModified('content')) {
         const wordsPerMinute = 200;
         const wordCount = this.content.split(/\s+/).length;
         this.readTime = Math.ceil(wordCount / wordsPerMinute);
     }
-    next();
 });
 
 // Indexes for efficient queries

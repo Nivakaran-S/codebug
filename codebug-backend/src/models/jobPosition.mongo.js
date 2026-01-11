@@ -81,12 +81,11 @@ const jobPositionSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Set posted date when status changes to open
-jobPositionSchema.pre('save', function (next) {
+// Set posted date when status changes to open (async middleware for Mongoose 8+)
+jobPositionSchema.pre('save', async function () {
     if (this.isModified('status') && this.status === 'open' && !this.postedAt) {
         this.postedAt = new Date();
     }
-    next();
 });
 
 // Indexes
