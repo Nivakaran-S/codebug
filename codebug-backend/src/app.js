@@ -26,6 +26,8 @@ app.use(
         origin: [
             'http://localhost:3000',
             'http://localhost:3001',
+            'https://codebug.lk',
+            'https://www.codebug.lk',
             'https://codebug.nivakaran.dev',
             'https://nivakaran.dev',
         ],
