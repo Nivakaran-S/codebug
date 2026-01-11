@@ -22,6 +22,7 @@ mongoose.connection.on('error', (err) => {
     console.error('Error connecting with MongoDB:', err);
 });
 
+
 // Start server
 async function startServer() {
     try {
