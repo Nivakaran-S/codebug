@@ -51,11 +51,18 @@ async function getProjectStats() {
     return { total, published, draft, archived };
 }
 
+// Get published projects (public)
+async function getPublishedProjects() {
+    return await Project.find({ status: 'published' }).sort({ createdAt: -1 }).lean();
+}
+
 module.exports = {
     getAllProjects,
     getProjectById,
     createProject,
     updateProject,
     deleteProject,
-    getProjectStats
+    getProjectStats,
+    getPublishedProjects
 };
+

@@ -49,9 +49,26 @@ app.use(cookieParser());
 app.use('/api/admin', adminRouter);
 
 // Contact form submission (public)
-app.post('/api/messages', async (req, res, next) => {
-    const messagesRouter = require('./routes/messages.router');
-    messagesRouter(req, res, next);
+app.post('/api/messages/contact', async (req, res) => {
+    try {
+        const messageModel = require('./models/message.model');
+        const message = await messageModel.createMessage(req.body);
+        res.status(201).json({ message: 'Message sent successfully', data: message });
+    } catch (error) {
+        console.error('Error sending contact message:', error);
+        res.status(400).json({ message: error.message || 'Failed to send message' });
+    }
+});
+
+// Public projects (portfolio)
+app.get('/api/projects/public', async (req, res) => {
+    try {
+        const projectModel = require('./models/project.model');
+        const projects = await projectModel.getPublishedProjects();
+        res.json(projects);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch projects' });
+    }
 });
 
 // Public case studies and reviews

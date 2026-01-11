@@ -47,9 +47,24 @@ async function getPositionById(id) {
 
 // Create new position
 async function createPosition(data) {
-    const position = new JobPosition(data);
-    await position.save();
-    return position;
+    try {
+        // Clean up experience data - remove undefined values
+        if (data.experience) {
+            if (data.experience.min === undefined || data.experience.min === null || data.experience.min === '') {
+                delete data.experience.min;
+            }
+            if (data.experience.max === undefined || data.experience.max === null || data.experience.max === '') {
+                delete data.experience.max;
+            }
+        }
+
+        const position = new JobPosition(data);
+        await position.save();
+        return position;
+    } catch (error) {
+        console.error('Error creating position:', error);
+        throw error;
+    }
 }
 
 // Update position

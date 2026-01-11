@@ -101,6 +101,7 @@ export const projectsAPI = {
         const query = params.toString() ? `?${params.toString()}` : '';
         return apiFetch<any[]>(`/api/projects${query}`);
     },
+    getPublic: () => apiFetch<any[]>('/api/projects/public'),
     getById: (id: string) => apiFetch<any>(`/api/projects/${id}`),
     create: (data: any) => apiFetch<any>('/api/projects', { method: 'POST', body: JSON.stringify(data) }),
     update: (id: string, data: any) => apiFetch<any>(`/api/projects/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
@@ -120,6 +121,9 @@ export const messagesAPI = {
     },
     getById: (id: string) => apiFetch<any>(`/api/messages/${id}`),
     create: (data: any) => apiFetch<any>('/api/messages', { method: 'POST', body: JSON.stringify(data) }),
+    // Public contact form - no auth required
+    sendContact: (data: { name: string; email: string; subject?: string; message: string; company?: string; phone?: string }) =>
+        apiFetch<{ message: string }>('/api/messages/contact', { method: 'POST', body: JSON.stringify(data) }),
     markAsRead: (id: string) => apiFetch<any>(`/api/messages/${id}/read`, { method: 'PATCH' }),
     reply: (id: string, replyMessage: string) => apiFetch<any>(`/api/messages/${id}/reply`, { method: 'POST', body: JSON.stringify({ replyMessage }) }),
     archive: (id: string) => apiFetch<any>(`/api/messages/${id}/archive`, { method: 'PATCH' }),
