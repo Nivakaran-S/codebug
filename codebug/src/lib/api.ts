@@ -1,6 +1,6 @@
 // API Configuration for Frontend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:8000';
 
 // Generic fetch wrapper with error handling
 async function apiFetch<T>(
