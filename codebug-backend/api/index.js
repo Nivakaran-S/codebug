@@ -6,6 +6,11 @@ const mongoose = require('mongoose');
 let cachedConnection = null;
 
 async function connectToDatabase() {
+    // Check if MONGO_URL is set
+    if (!process.env.MONGO_URL) {
+        throw new Error('MONGO_URL environment variable is not set. Please add it in Vercel Dashboard -> Settings -> Environment Variables');
+    }
+
     if (cachedConnection && mongoose.connection.readyState === 1) {
         console.log('Using cached database connection');
         return cachedConnection;
@@ -40,7 +45,7 @@ module.exports = async (req, res) => {
         console.error('Serverless function error:', error);
         return res.status(500).json({
             message: 'Internal Server Error',
-            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+            error: error.message
         });
     }
 };
