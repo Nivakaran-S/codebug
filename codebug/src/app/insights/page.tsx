@@ -230,7 +230,7 @@ export default function Insights() {
                         <input
                             type="email"
                             placeholder="Enter your email"
-                            className="flex-1 px-6 py-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EFA130] focus:border-transparent"
+                            className="flex-1 px-6 py-4 border border-gray-300 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#EFA130] focus:border-transparent"
                         />
                         <button
                             type="submit"
