@@ -248,24 +248,20 @@ const ChatBot = () => {
                         )}
                     </div>
                 ) : (
-                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-5 sm:pl-[calc(24px+env(safe-area-inset-left))] sm:pr-[calc(24px+env(safe-area-inset-right))]">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#4B4B4D] to-[#EFA130] flex items-center justify-center mb-4 sm:mb-6 shadow-xl">
-                            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
-                        <p className="text-gray-600 text-center leading-relaxed mb-4 text-sm sm:text-base px-2">
+                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-6">
+                       
+                        <h3 className="text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
+                        <p className="text-gray-600 text-center leading-relaxed mb-4 mx-[20px]">
                             I&apos;m an AI-powered assistant created by Codebug. I&apos;m here to guide you through our services and answer any questions you have. Let&apos;s explore together!
                         </p>
 
                         {/* Quick Actions */}
-                        <div className="flex flex-wrap justify-center gap-2 mt-2 sm:mt-4 max-w-sm px-2">
+                        <div className="flex flex-wrap justify-center gap-2 mt-4 max-w-sm">
                             {['What services do you offer?', 'Tell me about Codebug AI', 'How can I contact you?'].map((quick, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => onMessageSubmit(quick)}
-                                    className="px-3 py-2.5 sm:py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-[#EFA130] hover:text-black hover:border-[#EFA130] active:bg-[#d88f20] transition-all duration-300 touch-manipulation"
+                                    className="px-3 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-[#EFA130] hover:text-black hover:border-[#EFA130] transition-all duration-300"
                                 >
                                     {quick}
                                 </button>
