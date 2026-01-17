@@ -177,7 +177,7 @@ const ChatBot = () => {
                     shadow-2xl overflow-hidden`}
             >
                 {/* Header */}
-                <div className="w-full select-none px-4 sm:px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between items-center sm:rounded-t-[12px] pt-[calc(12px+env(safe-area-inset-top))] pb-3">
+                <div className="w-full select-none px-4 sm:px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between items-center sm:rounded-t-[12px] pt-[calc(12px+env(safe-area-inset-top))] pb-3 sticky top-0 z-10 sm:static">
                     <div className="flex items-center gap-3">
                         <div className="relative">
                             <Image src={Logo} alt="Codebug" width={30} height={30} className="brightness-0 invert" />
@@ -249,7 +249,7 @@ const ChatBot = () => {
                     </div>
                 ) : (
                     <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-6">
-                       
+
                         <h3 className="text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
                         <p className="text-gray-600 text-center leading-relaxed mb-4 mx-[20px]">
                             I&apos;m an AI-powered assistant created by Codebug. I&apos;m here to guide you through our services and answer any questions you have. Let&apos;s explore together!
