@@ -238,9 +238,11 @@ const ChatBot = () => {
 
                         {/* Typing Indicator */}
                         {typing && (
-                            <div className="flex py-[10px] items-center justify-start mb-3">
-                                <div className="rounded-lg p-3 flex justify-center items-center">
-                                    <span className="loader"></span>
+                            <div className="flex items-center justify-start mb-3">
+                                <div className="typing-indicator relative">
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
                                 </div>
                             </div>
                         )}
@@ -279,14 +281,14 @@ const ChatBot = () => {
                             onKeyDown={handleKeyDown}
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
-                            className="w-full focus:outline-none focus:ring-2 focus:ring-[#EFA130] min-h-[44px] sm:min-h-[40px] max-h-[100px] leading-[20px] sm:leading-[19px] rounded-[10px] sm:rounded-[8px] bg-[#f1f1f1] ring-gray-300 ring-[1px] text-black py-[10px] sm:py-[8px] px-[12px] sm:px-[10px] pr-[52px] sm:pr-[50px] resize-none text-[16px] sm:text-[14px] placeholder-gray-500"
+                            className="w-full focus:outline-none focus:ring-2 focus:ring-[#EFA130] min-h-[52px] sm:min-h-[48px] max-h-[120px] leading-[20px] sm:leading-[19px] rounded-[10px] sm:rounded-[8px] bg-[#f1f1f1] ring-gray-300 ring-[1px] text-black py-[12px] sm:py-[10px] px-[12px] sm:px-[10px] pr-[52px] sm:pr-[50px] resize-none text-[16px] sm:text-[14px] placeholder-gray-500"
                             placeholder="Ask Code..."
-                            rows={1}
+                            rows={2}
                             style={{ fontSize: '16px' }}
                         />
                         <div
                             onClick={() => onMessageSubmit(message)}
-                            className="absolute top-1/2 -translate-y-1/2 right-[6px] w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] ring-[0.5px] ring-[#727376] cursor-pointer hover:bg-[#d88f20] active:bg-[#c07f18] rounded-full bg-[#EFA130] flex items-center justify-center transition-colors shadow-lg touch-manipulation"
+                            className="absolute top-[25px] -translate-y-1/2 right-[6px] w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] ring-[0.5px] ring-[#727376] cursor-pointer hover:bg-[#d88f20] active:bg-[#c07f18] rounded-full bg-[#EFA130] flex items-center justify-center transition-colors shadow-lg touch-manipulation"
                         >
                             <Image alt="Send" className="ml-[2px]" src={Send} height={18} width={18} />
                         </div>

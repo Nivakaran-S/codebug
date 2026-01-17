@@ -1,42 +1,71 @@
-/* ChatBot Loader Animation */
-.loader {
-    width: 6px;
-    height: 25px;
-    border-radius: 4px;
-    display: block;
-    background-color: currentColor;
-    margin: 20px auto;
-    position: relative;
-    color: #EFA130;
-    animation: animloader 0.3s 0.3s linear infinite alternate;
+/* ChatBot Typing Indicator - Modern Bouncing Dots */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
 }
 
-.loader::after,
-.loader::before {
-    content: '';
-    width: 6px;
-    height: 25px;
-    border-radius: 4px;
-    background: currentColor;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 13px;
-    animation: animloader 0.3s 0.45s linear infinite alternate;
+.typing-indicator .dot {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #EFA130, #d88f20);
+    border-radius: 50%;
+    animation: typing-bounce 1.4s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(239, 161, 48, 0.3);
 }
 
-.loader::before {
-    left: -13px;
+.typing-indicator .dot:nth-child(1) {
     animation-delay: 0s;
 }
 
-@keyframes animloader {
-    0% {
-        height: 48px;
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
     }
 
+    30% {
+        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+/* Pulse glow effect on the container */
+.typing-indicator::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, rgba(239, 161, 48, 0.1), transparent);
+    border-radius: inherit;
+    z-index: -1;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
     100% {
-        height: 4px;
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
     }
 }
 
