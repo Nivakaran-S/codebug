@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import Logo from '../images/codebugfinal7.16115110.png';
+import Logo from '../images/codebug.png';
 import Send from '../images/arrowRight.png';
 import './ChatBot.css';
 
@@ -106,20 +106,33 @@ const ChatBot = () => {
     const handleToggle = () => {
         setIsOpen(!isOpen);
         if (!isOpen) {
-            document.body.style.overflowY = 'scroll';
+            // Prevent body scroll on mobile when chat is open
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
         }
     };
 
     const handleClose = () => {
         setIsOpen(false);
-        document.body.style.overflow = 'unset';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
     };
 
     useEffect(() => {
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
         };
     }, []);
 
@@ -135,7 +148,7 @@ const ChatBot = () => {
     };
 
     return (
-        <div className={`${isOpen ? 'h-[100vh] w-[100vw]' : ''} fixed z-[9999] text-black bottom-0 right-0`}>
+        <div className={`${isOpen ? 'h-[100dvh] w-[100vw]' : ''} fixed z-[9999] text-black bottom-0 right-0`}>
             {/* Backdrop */}
             <div
                 onClick={handleClose}
@@ -159,15 +172,15 @@ const ChatBot = () => {
                 className={`${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
                     chat-scrollbar absolute bottom-0 right-0 sm:bottom-[20px] sm:right-[30px] 
                     origin-bottom-right transition-all duration-500 ease-in-out 
-                    flex flex-col bg-white ring-[0.5px] ring-[#727376] 
-                    h-[100vh] w-[100vw] sm:h-[600px] sm:w-[420px] sm:rounded-[12px] 
+                    flex flex-col bg-[#0a0a0a] ring-[0.5px] ring-[#727376] 
+                    h-[100dvh] w-[100vw] sm:h-[600px] sm:w-[420px] sm:rounded-[12px] 
                     shadow-2xl overflow-hidden`}
             >
                 {/* Header */}
-                <div className="w-full select-none px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between sm:rounded-t-[12px] py-4 items-center safe-area-top">
+                <div className="w-full select-none px-4 sm:px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between items-center sm:rounded-t-[12px] pt-[calc(12px+env(safe-area-inset-top))] pb-3">
                     <div className="flex items-center gap-3">
                         <div className="relative">
-                            <Image src={Logo} alt="Codebug" width={100} height={30} className="brightness-0 invert" />
+                            <Image src={Logo} alt="Codebug" width={30} height={30} className="brightness-0 invert" />
                             <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-[#4B4B4D]" />
                         </div>
                         <div className="leading-tight">
@@ -177,7 +190,7 @@ const ChatBot = () => {
                     </div>
                     <div
                         onClick={handleClose}
-                        className="cursor-pointer hover:bg-white/10 p-2 rounded-full transition-colors"
+                        className="cursor-pointer hover:bg-white/10 active:bg-white/20 p-3 -mr-1 rounded-full transition-colors touch-manipulation"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -188,11 +201,13 @@ const ChatBot = () => {
                 {/* Messages Container */}
                 {messageSubmitted ? (
                     <div
-                        className="flex flex-col flex-1 overflow-y-auto py-4 px-5 bg-[#0a0a0a] chat-scrollbar safe-area-content"
+                        className="flex flex-col flex-1 overflow-y-auto py-3 sm:py-4 bg-[#0a0a0a] px-3 sm:pl-[calc(15px+env(safe-area-inset-left))] sm:pr-[calc(15px+env(safe-area-inset-right))] chat-scrollbar"
                         ref={scrollContainerRef}
                         style={{
                             WebkitOverflowScrolling: 'touch',
-                            overscrollBehavior: 'contain'
+                            overscrollBehavior: 'contain',
+                            paddingLeft: 'max(12px, env(safe-area-inset-left))',
+                            paddingRight: 'max(12px, env(safe-area-inset-right))'
                         }}
                     >
                         {/* Today Badge */}
@@ -214,7 +229,7 @@ const ChatBot = () => {
                                         className={`${msg.type === 'sender'
                                             ? 'border border-[#1D1D1D] self-end bg-[#EFA130] text-black'
                                             : 'border border-gray-600 flex-col self-start bg-[#1a1a1a] text-white'
-                                            } flex max-w-[85%] sm:max-w-[80%] text-left rounded-[8px] py-[8px] px-[13px] text-[14px] leading-relaxed`}
+                                            } flex max-w-[90%] sm:max-w-[80%] text-left rounded-[12px] sm:rounded-[8px] py-[10px] sm:py-[8px] px-[14px] sm:px-[13px] text-[15px] sm:text-[14px] leading-relaxed`}
                                     >
                                         {parseMessageToJSX(msg.content)}
                                     </div>
@@ -231,24 +246,24 @@ const ChatBot = () => {
                         )}
                     </div>
                 ) : (
-                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-6 safe-area-content">
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#4B4B4D] to-[#EFA130] flex items-center justify-center mb-6 shadow-xl">
-                            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-5 sm:pl-[calc(24px+env(safe-area-inset-left))] sm:pr-[calc(24px+env(safe-area-inset-right))]">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#4B4B4D] to-[#EFA130] flex items-center justify-center mb-4 sm:mb-6 shadow-xl">
+                            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
-                        <p className="text-gray-600 text-center leading-relaxed mb-4 mx-[20px]">
+                        <h3 className="text-lg sm:text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
+                        <p className="text-gray-600 text-center leading-relaxed mb-4 text-sm sm:text-base px-2">
                             I&apos;m an AI-powered assistant created by Codebug. I&apos;m here to guide you through our services and answer any questions you have. Let&apos;s explore together!
                         </p>
 
                         {/* Quick Actions */}
-                        <div className="flex flex-wrap justify-center gap-2 mt-4 max-w-sm">
+                        <div className="flex flex-wrap justify-center gap-2 mt-2 sm:mt-4 max-w-sm px-2">
                             {['What services do you offer?', 'Tell me about Codebug AI', 'How can I contact you?'].map((quick, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => onMessageSubmit(quick)}
-                                    className="px-3 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-[#EFA130] hover:text-black hover:border-[#EFA130] transition-all duration-300"
+                                    className="px-3 py-2.5 sm:py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 hover:bg-[#EFA130] hover:text-black hover:border-[#EFA130] active:bg-[#d88f20] transition-all duration-300 touch-manipulation"
                                 >
                                     {quick}
                                 </button>
@@ -258,25 +273,25 @@ const ChatBot = () => {
                 )}
 
                 {/* Input Area */}
-                <div className="w-full ring-[1px] ring-[#e5e5e5] bg-white py-[10px] px-[10px] safe-area-bottom">
+                <div className="w-full ring-[1px] ring-[#e5e5e5] bg-white pt-2 sm:pt-[10px] pb-[calc(8px+env(safe-area-inset-bottom))] px-3 sm:px-[10px]">
                     <div className="relative">
                         <textarea
                             onKeyDown={handleKeyDown}
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
-                            className="w-full focus:outline-none focus:ring-2 focus:ring-[#EFA130] min-h-[40px] max-h-[100px] leading-[19px] rounded-[8px] bg-[#f1f1f1] ring-gray-300 ring-[1px] text-black py-[8px] px-[10px] pr-[50px] resize-none text-[14px] placeholder-gray-500"
+                            className="w-full focus:outline-none focus:ring-2 focus:ring-[#EFA130] min-h-[44px] sm:min-h-[40px] max-h-[100px] leading-[20px] sm:leading-[19px] rounded-[10px] sm:rounded-[8px] bg-[#f1f1f1] ring-gray-300 ring-[1px] text-black py-[10px] sm:py-[8px] px-[12px] sm:px-[10px] pr-[52px] sm:pr-[50px] resize-none text-[16px] sm:text-[14px] placeholder-gray-500"
                             placeholder="Ask Code..."
-                            rows={2}
+                            rows={1}
                             style={{ fontSize: '16px' }}
                         />
                         <div
                             onClick={() => onMessageSubmit(message)}
-                            className="absolute top-[5px] right-[5px] w-[40px] h-[40px] ring-[0.5px] ring-[#727376] cursor-pointer hover:bg-[#d88f20] rounded-full bg-[#EFA130] flex items-center justify-center transition-colors shadow-lg"
+                            className="absolute top-1/2 -translate-y-1/2 right-[6px] w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] ring-[0.5px] ring-[#727376] cursor-pointer hover:bg-[#d88f20] active:bg-[#c07f18] rounded-full bg-[#EFA130] flex items-center justify-center transition-colors shadow-lg touch-manipulation"
                         >
                             <Image alt="Send" className="ml-[2px]" src={Send} height={18} width={18} />
                         </div>
                     </div>
-                    <div className="text-gray-500 text-right text-[11px] mt-1">
+                    <div className="text-gray-400 text-right text-[10px] sm:text-[11px] mt-1">
                         <p>Powered by Codebug Technologies</p>
                     </div>
                 </div>
