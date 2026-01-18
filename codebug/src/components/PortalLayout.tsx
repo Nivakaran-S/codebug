@@ -65,8 +65,8 @@ export default function PortalLayout({ children, title, description }: PortalLay
             )}
 
             {/* Sidebar */}
-            <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0f0f0f] border-r border-white/10 transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                <div className="flex flex-col h-full">
+            <aside className={`fixed inset-y-0 left-0 z-50 w-64 h-screen max-h-screen bg-[#0f0f0f] border-r border-white/10 transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="flex flex-col h-full overflow-hidden">
                     {/* Logo */}
                     <div className="p-6 border-b border-white/10">
                         <Link href="/" className="flex items-center gap-3">
@@ -125,7 +125,7 @@ export default function PortalLayout({ children, title, description }: PortalLay
             </aside>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className="flex-1 flex flex-col min-w-0 lg:ml-64">
                 {/* Header */}
                 <header className="sticky top-0 z-30 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/10">
                     <div className="flex items-center justify-between p-4 lg:px-8">
