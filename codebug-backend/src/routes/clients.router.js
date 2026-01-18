@@ -112,4 +112,68 @@ router.patch('/:id/activate', async (req, res) => {
     }
 });
 
+// ============ CLIENT SELF-SERVICE ENDPOINTS ============
+
+// GET /api/clients/profile - Get current client profile
+router.get('/profile', async (req, res) => {
+    try {
+        // Only clients can access their own profile
+        if (req.userRole !== 'client') {
+            return res.status(403).json({ message: 'Access denied' });
+        }
+
+        const client = await clientModel.getClientById(req.userId);
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
+        }
+        res.json(client);
+    } catch (error) {
+        console.error('Error fetching client profile:', error);
+        res.status(500).json({ message: 'Failed to fetch profile' });
+    }
+});
+
+// PUT /api/clients/profile - Update current client profile
+router.put('/profile', async (req, res) => {
+    try {
+        // Only clients can update their own profile
+        if (req.userRole !== 'client') {
+            return res.status(403).json({ message: 'Access denied' });
+        }
+
+        const { name, company, phone } = req.body;
+        const client = await clientModel.updateClient(req.userId, { name, company, phone });
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
+        }
+        res.json({ message: 'Profile updated successfully', client });
+    } catch (error) {
+        console.error('Error updating client profile:', error);
+        res.status(500).json({ message: 'Failed to update profile' });
+    }
+});
+
+// POST /api/clients/change-password - Change client password
+router.post('/change-password', async (req, res) => {
+    try {
+        if (req.userRole !== 'client') {
+            return res.status(403).json({ message: 'Access denied' });
+        }
+
+        const { currentPassword, newPassword } = req.body;
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ message: 'Current password and new password are required' });
+        }
+
+        const result = await clientModel.changePassword(req.userId, currentPassword, newPassword);
+        if (!result.success) {
+            return res.status(400).json({ message: result.message });
+        }
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ message: 'Failed to change password' });
+    }
+});
+
 module.exports = router;

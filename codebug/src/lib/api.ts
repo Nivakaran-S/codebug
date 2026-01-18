@@ -89,6 +89,17 @@ export const authAPI = {
             orders: { total: number; pending: number; inProgress: number; review: number; completed: number };
             tickets: { total: number; open: number; inProgress: number; resolved: number; closed: number };
         }>('/api/admin/dashboard'),
+
+    // Admin management
+    getAllAdmins: (filters?: { search?: string; role?: string }) => {
+        const params = new URLSearchParams();
+        if (filters?.search) params.append('search', filters.search);
+        if (filters?.role) params.append('role', filters.role);
+        const query = params.toString() ? `?${params.toString()}` : '';
+        return apiFetch<any[]>(`/api/admin/admins${query}`);
+    },
+    getAdminStats: () => apiFetch<{ total: number; admins: number; editors: number; viewers: number }>('/api/admin/admins/stats'),
+    deleteAdmin: (id: string) => apiFetch<{ message: string }>(`/api/admin/admins/${id}`, { method: 'DELETE' }),
 };
 
 // ============ PROJECTS API ============
@@ -186,6 +197,15 @@ export const clientsAPI = {
     deactivate: (id: string) => apiFetch<any>(`/api/clients/${id}/deactivate`, { method: 'PATCH' }),
     activate: (id: string) => apiFetch<any>(`/api/clients/${id}/activate`, { method: 'PATCH' }),
     getStats: () => apiFetch<any>('/api/clients/stats'),
+    // Client self-service endpoints
+    getProfile: () => apiFetch<any>('/api/clients/profile'),
+    updateProfile: (data: { name?: string; company?: string; phone?: string }) =>
+        apiFetch<any>('/api/clients/profile', { method: 'PUT', body: JSON.stringify(data) }),
+    changePassword: (currentPassword: string, newPassword: string) =>
+        apiFetch<{ message: string }>('/api/clients/change-password', {
+            method: 'POST',
+            body: JSON.stringify({ currentPassword, newPassword })
+        }),
 };
 
 // ============ ORDERS API ============

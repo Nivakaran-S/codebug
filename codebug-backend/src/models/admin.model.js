@@ -73,11 +73,43 @@ async function changePassword(id, currentPassword, newPassword) {
     return { success: true, message: 'Password changed successfully' };
 }
 
+// Get all admins
+async function getAllAdmins(filters = {}) {
+    const query = {};
+    if (filters.search) {
+        query.$or = [
+            { name: { $regex: filters.search, $options: 'i' } },
+            { email: { $regex: filters.search, $options: 'i' } }
+        ];
+    }
+    if (filters.role && filters.role !== 'all') {
+        query.role = filters.role;
+    }
+    return await Admin.find(query).select('-password').sort({ createdAt: -1 });
+}
+
+// Delete admin
+async function deleteAdmin(id) {
+    return await Admin.findByIdAndDelete(id);
+}
+
+// Get admin stats
+async function getAdminStats() {
+    const total = await Admin.countDocuments();
+    const admins = await Admin.countDocuments({ role: 'admin' });
+    const editors = await Admin.countDocuments({ role: 'editor' });
+    const viewers = await Admin.countDocuments({ role: 'viewer' });
+    return { total, admins, editors, viewers };
+}
+
 module.exports = {
     getAdminByEmail,
     getAdminById,
     createAdmin,
     updateAdmin,
     authenticateAdmin,
-    changePassword
+    changePassword,
+    getAllAdmins,
+    deleteAdmin,
+    getAdminStats
 };

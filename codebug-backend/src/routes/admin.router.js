@@ -192,6 +192,48 @@ router.get('/dashboard', authMiddleware, adminOnly, async (req, res) => {
     }
 });
 
+// GET /api/admin/admins - Get all admins (admin only)
+router.get('/admins', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const { search, role } = req.query;
+        const admins = await adminModel.getAllAdmins({ search, role });
+        res.json(admins);
+    } catch (error) {
+        console.error('Error fetching admins:', error);
+        res.status(500).json({ message: 'Failed to fetch admins' });
+    }
+});
+
+// GET /api/admin/admins/stats - Get admin statistics (admin only)
+router.get('/admins/stats', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const stats = await adminModel.getAdminStats();
+        res.json(stats);
+    } catch (error) {
+        console.error('Error fetching admin stats:', error);
+        res.status(500).json({ message: 'Failed to fetch admin stats' });
+    }
+});
+
+// DELETE /api/admin/admins/:id - Delete admin (admin only)
+router.delete('/admins/:id', authMiddleware, adminOnly, async (req, res) => {
+    try {
+        // Prevent self-deletion
+        if (req.params.id === req.userId) {
+            return res.status(400).json({ message: 'Cannot delete your own account' });
+        }
+
+        const admin = await adminModel.deleteAdmin(req.params.id);
+        if (!admin) {
+            return res.status(404).json({ message: 'Admin not found' });
+        }
+        res.json({ message: 'Admin deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).json({ message: 'Failed to delete admin' });
+    }
+});
+
 // POST /api/admin/register-admin - Register new admin (admin only)
 router.post('/register-admin', authMiddleware, adminOnly, async (req, res) => {
     try {
