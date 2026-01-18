@@ -174,10 +174,10 @@ const ChatBot = () => {
                     origin-bottom-right transition-all duration-500 ease-in-out 
                     flex flex-col bg-[#0a0a0a] ring-[0.5px] ring-[#727376] 
                     h-[100dvh] w-[100vw] sm:h-[600px] sm:w-[420px] sm:rounded-[12px] 
-                    shadow-2xl overflow-hidden`}
+                    shadow-2xl overflow-hidden chat-container-mobile`}
             >
                 {/* Header */}
-                <div className="w-full sm:w-auto fixed sm:static top-0 left-0 sm:left-auto z-10 select-none px-4 sm:px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between items-center sm:rounded-t-[12px] pt-[calc(12px+env(safe-area-inset-top))] pb-3">
+                <div className="chat-header-fixed w-full shrink-0 sticky top-0 z-10 select-none px-4 sm:px-5 bg-gradient-to-r from-[#4B4B4D] to-[#3a3a3a] text-white flex flex-row justify-between items-center sm:rounded-t-[12px] pt-[calc(12px+env(safe-area-inset-top))] pb-3">
                     <div className="flex items-center gap-3">
                         <div className="relative">
                             <Image src={Logo} alt="Codebug" width={30} height={30} className="brightness-0 invert" />
@@ -201,7 +201,7 @@ const ChatBot = () => {
                 {/* Messages Container */}
                 {messageSubmitted ? (
                     <div
-                        className="flex flex-col flex-1 overflow-y-auto pt-[70px] sm:pt-3 pb-3 sm:py-4 bg-[#0a0a0a] px-3 sm:pl-[calc(15px+env(safe-area-inset-left))] sm:pr-[calc(15px+env(safe-area-inset-right))] chat-scrollbar"
+                        className="chat-content-scroll flex flex-col flex-1 overflow-y-auto py-3 sm:py-4 bg-[#0a0a0a] px-3 sm:pl-[calc(15px+env(safe-area-inset-left))] sm:pr-[calc(15px+env(safe-area-inset-right))] chat-scrollbar"
                         ref={scrollContainerRef}
                         style={{
                             WebkitOverflowScrolling: 'touch',
@@ -248,7 +248,7 @@ const ChatBot = () => {
                         )}
                     </div>
                 ) : (
-                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-6 pt-[70px] sm:pt-0">
+                    <div className="flex-1 flex flex-col justify-center items-center bg-[#f8f8f8] px-6">
 
                         <h3 className="text-xl font-bold text-[#171717] mb-2 text-center">Hi! I&apos;m Code</h3>
                         <p className="text-gray-600 text-center leading-relaxed mb-4 mx-[20px]">
