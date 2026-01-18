@@ -184,7 +184,7 @@ app.use('/api/projects', authMiddleware, adminOnly, projectsRouter);
 app.use('/api/messages', authMiddleware, adminOnly, messagesRouter);
 app.use('/api/case-studies', authMiddleware, adminOnly, caseStudiesRouter);
 app.use('/api/reviews', authMiddleware, adminOnly, reviewsRouter);
-app.use('/api/clients', authMiddleware, adminOnly, clientsRouter);
+app.use('/api/clients', authMiddleware, clientsRouter); // Both admin and clients (routes handle permissions)
 app.use('/api/articles', authMiddleware, adminOnly, articlesRouter);
 app.use('/api/careers', authMiddleware, adminOnly, careersRouter);
 

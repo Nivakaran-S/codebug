@@ -6,6 +6,10 @@ const router = express.Router();
 // GET /api/clients - Get all clients (Admin only)
 router.get('/', async (req, res) => {
     try {
+        // Only admins can list all clients
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const { status, search } = req.query;
         const clients = await clientModel.getAllClients({ status, search });
         res.json(clients);
@@ -15,9 +19,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /api/clients/stats - Get client statistics
+// GET /api/clients/stats - Get client statistics (Admin only)
 router.get('/stats', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const stats = await clientModel.getClientStats();
         res.json(stats);
     } catch (error) {
@@ -91,9 +98,12 @@ router.post('/change-password', async (req, res) => {
     }
 });
 
-// GET /api/clients/:id - Get single client
+// GET /api/clients/:id - Get single client (Admin only)
 router.get('/:id', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const client = await clientModel.getClientById(req.params.id);
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
@@ -108,6 +118,9 @@ router.get('/:id', async (req, res) => {
 // POST /api/clients - Create new client (Admin only)
 router.post('/', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const { name, email, password, company, phone } = req.body;
 
         if (!name || !email || !password) {
@@ -135,9 +148,12 @@ router.post('/', async (req, res) => {
     }
 });
 
-// PUT /api/clients/:id - Update client
+// PUT /api/clients/:id - Update client (Admin only)
 router.put('/:id', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const client = await clientModel.updateClient(req.params.id, req.body);
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
@@ -149,9 +165,12 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// PATCH /api/clients/:id/deactivate - Deactivate client
+// PATCH /api/clients/:id/deactivate - Deactivate client (Admin only)
 router.patch('/:id/deactivate', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const client = await clientModel.deactivateClient(req.params.id);
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
@@ -163,9 +182,12 @@ router.patch('/:id/deactivate', async (req, res) => {
     }
 });
 
-// PATCH /api/clients/:id/activate - Activate client
+// PATCH /api/clients/:id/activate - Activate client (Admin only)
 router.patch('/:id/activate', async (req, res) => {
     try {
+        if (req.userRole !== 'admin') {
+            return res.status(403).json({ message: 'Admin access required' });
+        }
         const client = await clientModel.updateClient(req.params.id, { status: 'active' });
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
