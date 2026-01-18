@@ -170,10 +170,10 @@ const ChatBot = () => {
             {/* Chat Container */}
             <div
                 className={`${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} 
-                    chat-scrollbar absolute bottom-0 right-0 sm:bottom-[20px] sm:right-[30px] 
+                    chat-scrollbar fixed inset-0 sm:absolute sm:inset-auto sm:bottom-[20px] sm:right-[30px] 
                     origin-bottom-right transition-all duration-500 ease-in-out 
                     flex flex-col bg-[#0a0a0a] ring-[0.5px] ring-[#727376] 
-                    h-[100dvh] w-[100vw] sm:h-[600px] sm:w-[420px] sm:rounded-[12px] 
+                    h-[100vh] w-[100vw] sm:h-[600px] sm:w-[420px] sm:rounded-[12px] 
                     shadow-2xl overflow-hidden chat-container-mobile`}
             >
                 {/* Header */}
