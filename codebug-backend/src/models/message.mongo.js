@@ -36,6 +36,14 @@ const messageSchema = new mongoose.Schema({
     },
     replyMessage: {
         type: String
+    },
+    company: {
+        type: String,
+        trim: true
+    },
+    phone: {
+        type: String,
+        trim: true
     }
 }, {
     timestamps: true

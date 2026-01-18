@@ -228,6 +228,8 @@ router.post('/register-client', authMiddleware, adminOnly, async (req, res) => {
     try {
         const { name, email, password, company, phone } = req.body;
 
+        console.log('Register client request:', { name, email, company, phone, createdBy: req.adminId || req.userId });
+
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Name, email and password are required' });
         }
@@ -237,9 +239,12 @@ router.post('/register-client', authMiddleware, adminOnly, async (req, res) => {
             return res.status(400).json({ message: 'Client with this email already exists' });
         }
 
+        // Use req.userId as fallback if req.adminId is not set
+        const createdBy = req.adminId || req.userId;
+
         const client = await clientModel.createClient(
             { name, email, password, company, phone },
-            req.adminId
+            createdBy
         );
 
         res.status(201).json({
@@ -247,8 +252,8 @@ router.post('/register-client', authMiddleware, adminOnly, async (req, res) => {
             client
         });
     } catch (error) {
-        console.error('Error registering client:', error);
-        res.status(500).json({ message: 'Failed to register client' });
+        console.error('Error registering client:', error.message, error.stack);
+        res.status(500).json({ message: 'Failed to register client', error: error.message });
     }
 });
 

@@ -38,7 +38,7 @@ async function authenticateAdmin(email, password) {
 
     // Generate JWT token
     const token = jwt.sign(
-        { id: admin._id, email: admin.email, role: admin.role },
+        { id: admin._id, email: admin.email, role: admin.role, name: admin.name },
         process.env.JWT_SECRET,
         { expiresIn: '7d' }
     );

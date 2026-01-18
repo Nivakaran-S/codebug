@@ -30,6 +30,9 @@ app.use(
             'https://www.codebug.lk',
             'https://codebug.nivakaran.dev',
             'https://nivakaran.dev',
+            'https://codebug-8u99.vercel.app',
+            // Allow all Vercel preview deployments
+            /https:\/\/codebug.*\.vercel\.app$/,
         ],
         credentials: true,
     })
@@ -52,8 +55,18 @@ app.use('/api/admin', adminRouter);
 app.post('/api/messages/contact', async (req, res) => {
     try {
         const messageModel = require('./models/message.model');
-        const message = await messageModel.createMessage(req.body);
-        res.status(201).json({ message: 'Message sent successfully', data: message });
+        // Map frontend field names to backend field names
+        const { name, email, subject, message, company, phone } = req.body;
+        const messageData = {
+            senderName: name,
+            senderEmail: email,
+            subject: subject || 'Contact Form Submission',
+            message: message,
+            company: company,
+            phone: phone
+        };
+        const createdMessage = await messageModel.createMessage(messageData);
+        res.status(201).json({ message: 'Message sent successfully', data: createdMessage });
     } catch (error) {
         console.error('Error sending contact message:', error);
         res.status(400).json({ message: error.message || 'Failed to send message' });
